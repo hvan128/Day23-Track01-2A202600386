@@ -1,48 +1,18 @@
 # 04 — Reflection cá nhân
 
 **Học viên:** Ngô Hải Văn · 2A202600386
-**Product được analyze:** GradeAI
-**Deadline:** 24h sau lớp · 10 điểm · 150-200 từ
+**Product:** GradeAI
+**Block 5+24h · 10 điểm**
 **Prompt:** *"1 chỉ số hoặc 1 giả định về áp dụng AI tôi sẽ sửa là gì? Vì sao?"*
 
-> Yêu cầu: pick 1 metric trong dashboard, giải thích cơ chế vanity/cheat, đề xuất prevention concrete, cite 1 case từ Block 2.
-
 ---
 
-## Pre-draft (sửa sau khi nghe red-team)
+## Final reflection
 
-**Chỉ số sẽ sửa:** *"# GV active dùng GradeAI ≥2 đợt kiểm tra/quý"* (KR1 product-level)
+Chỉ số tôi sẽ sửa là **KR1 trong dashboard GradeAI** — "# giáo viên active dùng ≥2 đợt kiểm tra/quý" (target 200 GV trong 90 ngày).
 
-**Vì sao đây là vanity/cheat (lesson từ WeFit):**
-KR1 hiện đếm GV mở app + grade ≥1 bài trong 2 đợt. Vấn đề: GV champion (top 10) có thể grade rất nhiều bài lấp liếm mass-market GV chỉ thử 1 bài rồi bỏ — y hệt WeFit pattern *10% user dùng 80% lượt*. Dashboard sẽ xanh ở 200 GV nhưng unit economics có thể đỏ: nếu power-user là champion miễn phí + mass-market churn 15%, MRR thực < 30M (target 40M) và CAC payback dài ra.
+Lúc draft v1 tôi cho đây là leading indicator tốt. Sau red-team mới thấy nó là vanity. KR1 đếm tổng số GV active mà không phân biệt champion (top 10 pilot, retention 80%) và mass-market (GV mới qua paid acquisition). Một dashboard 200 GV có thể che giấu: 30 champion × 90% retention + 170 mass-market × 30% retention = 153 — đẹp trên paper nhưng unit economics đỏ. CAC 300K của 170 mass-market đã đốt ~51M, MRR thật chỉ ~30M, payback kéo dài lê thê.
 
-**Sửa thành (composite + per-unit):**
-- **Outcome**: % GV qua đợt-1 → ĐỢT-2 active (cohort retention) ≥ 60%, KHÔNG đếm champion cohort
-- **Per-unit**: Contribution margin per active GV = (ARPU 200K − COGS 75K − allocated CAC 300K/payback 2.4mo) ≥ +50K VND
-- **Quality gate**: Sean Ellis ≥ 40% "very disappointed without GradeAI" trên cohort mass-market
+Đây chính xác là pattern **WeFit** — 10% user dùng 80% lượt, GMV và check-in tăng đều nhưng mỗi lượt lỗ → phá sản. Cho đến khi đọc case, tôi không nhìn ra cohort-split là vấn đề sống còn cho AI adoption.
 
-**Cơ chế prevention:**
-- Tách cohort champion / mass-market trong dashboard
-- "% GV active không tính champion" + "Mass-market retention curve" phải bằng/hơn champion
-- KR1 không hiển thị tổng count mà hiển thị **distribution** (top-10/median/long-tail)
-
-**Case evidence:**
-WeFit đo lượt check-in tăng đều nhưng power-user 10% phá unit economics → mỗi check-in lỗ → phá sản. Áp vào GradeAI: nếu chỉ đo tổng GV active mà không tách cohort, champion lấp liếm mass-market churn → grow đẹp 90 ngày nhưng pivot bắt buộc Quý 2 vì MRR không catch up với burn.
-
----
-
-## Anti-pattern cần tránh
-
-- KHÔNG copy-paste reflection giữa thành viên → 0đ tất cả người liên quan
-- KHÔNG viết "đã review lại" / "sẽ training thêm" mà không có thay đổi metric cụ thể
-- PHẢI cite case từ Block 2 (WeFit hoặc MoMo)
-- PHẢI có *prevention mechanism* cụ thể (ai own, đo bằng gì, threshold action)
-
----
-
-## Final draft slot (sẽ chốt sau Block 5)
-
-```markdown
-[Viết final 150-200 từ ở đây, trong 24h sau lớp.
-Sửa pre-draft trên dựa câu hỏi red-team đã thực sự nhận được.]
-```
+Sửa: tách cohort. Dashboard hiển thị "champion retention" vs "mass-market retention" hai dòng riêng. KR1 chỉ PASS khi **mass-market cohort retention ≥ 60%**, KHÔNG cộng champion. Thêm distribution view (top10/median/long-tail) cho mọi metric Engagement. Decision rule: mass-market < 50% sau 60 ngày → pause paid acquisition, fix onboarding trước khi scale.
