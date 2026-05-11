@@ -9,10 +9,10 @@
 
 ## Final reflection
 
-Chỉ số tôi sẽ sửa là **KR1 trong dashboard GradeAI** — "# giáo viên active dùng ≥2 đợt kiểm tra/quý" (target 200 GV trong 90 ngày).
+Chỉ số tôi sẽ sửa là **KR1 dashboard GradeAI** — "# giáo viên active dùng ≥2 đợt kiểm tra/quý" (target 200 GV).
 
-Lúc draft v1 tôi cho đây là leading indicator tốt. Sau red-team mới thấy nó là vanity. KR1 đếm tổng số GV active mà không phân biệt champion (top 10 pilot, retention 80%) và mass-market (GV mới qua paid acquisition). Một dashboard 200 GV có thể che giấu: 30 champion × 90% retention + 170 mass-market × 30% retention = 153 — đẹp trên paper nhưng unit economics đỏ. CAC 300K của 170 mass-market đã đốt ~51M, MRR thật chỉ ~30M, payback kéo dài lê thê.
+Draft v1 tôi cho đây là leading indicator tốt. Sau red-team mới thấy nó là vanity. KR1 đếm tổng GV active mà không tách champion (top 10 pilot, retention 80%) và mass-market (GV mới qua paid acquisition). Dashboard 200 GV có thể che: 30 champion × 90% + 170 mass-market × 30% = 153 — đẹp trên paper nhưng unit economics đỏ. CAC 300K của 170 mass-market đốt ~51M, MRR thật ~30M, payback kéo dài.
 
-Đây chính xác là pattern **WeFit** — 10% user dùng 80% lượt, GMV và check-in tăng đều nhưng mỗi lượt lỗ → phá sản. Cho đến khi đọc case, tôi không nhìn ra cohort-split là vấn đề sống còn cho AI adoption.
+Đây chính xác là pattern **WeFit** — 10% user dùng 80% lượt, GMV và check-in tăng đều nhưng mỗi lượt lỗ → phá sản. Đến khi đọc case tôi mới thấy cohort-split là vấn đề sống còn.
 
-Sửa: tách cohort. Dashboard hiển thị "champion retention" vs "mass-market retention" hai dòng riêng. KR1 chỉ PASS khi **mass-market cohort retention ≥ 60%**, KHÔNG cộng champion. Thêm distribution view (top10/median/long-tail) cho mọi metric Engagement. Decision rule: mass-market < 50% sau 60 ngày → pause paid acquisition, fix onboarding trước khi scale.
+Sửa: tách cohort. Dashboard hiển thị "champion retention" vs "mass-market retention" hai dòng riêng. KR1 chỉ PASS khi **mass-market retention ≥ 60%**, không cộng champion. Thêm distribution view (top10/median/long-tail) cho mọi metric Engagement. Decision rule: mass-market < 50% sau 60 ngày → pause paid acquisition, fix onboarding trước khi scale.
