@@ -104,11 +104,11 @@ Ability (kết hợp Knowledge gap) — Desire ban đầu cao nhưng không qua 
 
 ### D.1 Chỉ số toàn sản phẩm (B.1) — mỗi growth metric đi kèm per-unit (chống WeFit trap)
 
-| Lớp đo | Chỉ số | Per-unit pair (KHÔNG được thiếu) | Baseline | Target 90d | Data source | Owner | "Không chứng minh được ___" | Red-team risk | Sửa v2 |
+| Lớp đo | Chỉ số | Per-unit pair (KHÔNG được thiếu) | Baseline | Target 90d | Data source | Owner | "Không chứng minh được ___" | Red-team risk (col 7) | Sửa v2 (col 8) |
 |---|---|---|---:|---:|---|---|---|---|---|
-| **Activation (KR1 Leading)** | # GV active dùng ≥2 đợt kiểm tra trong quý | Cost per active GV qua 2 đợt = CAC / activation-to-2nd-batch-rate | 50 (pilot) | **200** | Supabase grading_sessions table + cohort SQL | Founder | Không chứng minh GV qua đợt 2 tự nguyện hay vì miễn phí thử nghiệm | (chờ red-team) | (chờ red-team) |
-| **Value (KR2 Lagging)** | MRR (Monthly Recurring Revenue) | Contribution margin per active GV = (ARPU 200K − COGS 75K) − allocated CAC payback | 0 (chưa charge) | **40M VND** | Stripe billing | Founder | MRR tăng có thể vì discount, không vì willingness to pay thật | | |
-| **Quality/Trust (KR3 Protect)** | NPS + Churn rate | NPS theo cohort (đợt 1 / đợt 2 / đợt 3+) + churn theo cohort | NPS pilot ~chưa đo công khai | **NPS >50, Churn <8%/mo** | In-product Sean Ellis survey + Stripe churn | PM | NPS cao có thể bias từ champion cohort, không represent mass-market | | |
+| **Activation (KR1 Leading)** | # GV active dùng ≥2 đợt kiểm tra trong quý | Cost per active GV qua 2 đợt = CAC 300K / mass-market-2nd-batch-retention | 50 GV pilot (Lab 19) — 80% retention nhưng chưa qua 6-8 tuần (Lab 22 caveat) | **200** | Supabase grading_sessions + cohort SQL | Founder | Không chứng minh GV qua đợt 2 vì love product hay vì pilot miễn phí. Champion (top-10) lấp liếm mass-market churn | **WeFit trap**: 10% champion dùng 80% lượt → tổng count đẹp nhưng mass-market churn ẩn → CAC payback dài, MRR không catch up | **SPLIT cohort**: tách "champion cohort retention" (~80% pilot baseline) vs "mass-market cohort retention" (target ≥60%, không tính champion). KR1 chỉ PASS khi mass-market cohort retention ≥ 60% |
+| **Value (KR2 Lagging)** | MRR (Monthly Recurring Revenue) | Contribution margin per active GV = ARPU 200K − COGS 75K = **125K/GV/mo** (− allocated CAC payback 300K/2.4mo) | 0 VND (pre-revenue, pilot free) | **40M VND** (= 200 GV × 200K ARPU) | Stripe billing | Founder | MRR tăng có thể vì discount/promo, không vì WTP thật. Lab 18 base case không stress-test với 30% discount | **CFO**: ARPU 200K từ WTP nào? Lab 18 derive từ "17% time-value capture" — chưa A/B test giá khác. Nếu thực ép xuống 150K → LTV/CAC từ 4.17 xuống 3.1 (gần ngưỡng VC nguy hiểm) | **Add price-test gate**: trước khi scale ngoài pilot, A/B test 3 price points (150K / 200K / 250K) với N≥30/bucket. Decision rule: nếu 200K conversion < 200K WTP × 60% → giảm ARPU + recompute LTV/CAC |
+| **Quality/Trust (KR3 Protect)** | NPS + Churn rate | NPS theo cohort (đợt-1 / đợt-2 / đợt-3+) + churn theo cohort | NPS pilot chưa công bố (~chưa đo Sean Ellis) | **NPS >50, Churn <8%/mo** | In-product Sean Ellis survey + Stripe churn | PM | NPS cao có thể bias từ champion cohort, không represent mass-market. NPS không = học sinh thấy feedback hữu ích | **Risk**: Marketing claim "3× faster" (Lab 19) chưa A/B test 200 GV. Lab 22 audit cảnh báo Khoản 2 Điều 198 nếu sai (>50M VND profit). Trust signal hiện đo từ GV không đo từ học sinh — đối tượng cuối | **Add student-side trust metric**: % bài học sinh dispute điểm/feedback (target <5%); ngưng public claim "3× faster" cho đến khi N≥150 GV measured A/B; thêm in-app disclosure "feedback có AI hỗ trợ" cho phụ huynh/HS (compliance) |
 
 ### D.2 Chỉ số theo từng workflow (B.2)
 
@@ -127,12 +127,12 @@ Ability (kết hợp Knowledge gap) — Desire ban đầu cao nhưng không qua 
 
 | Lớp | Metric | Per-unit pair | Baseline | Target | Data source | Owner | "Không chứng minh ___" |
 |---|---|---|---:|---:|---|---|---|
-| Activation | % GV submit ≥1 batch grading trong tuần đầu | Cost per first-grading-batch | TBD | 75% | grading_sessions | PM | First batch không = adoption thật, cần đợt 2 |
-| Engagement | Avg essays graded / session | Cost/essay graded (Haiku API + retraining) | TBD | 30+ | LLM API log | PM | Power-user lấp liếm — phân phối theo GV |
-| Productivity | Time-per-essay (upload→graded draft) | Token cost/essay | manual ~15-20p | <5p | App telemetry | PM | Nhanh hơn ≠ chất lượng giữ được |
-| **Quality** | **% AI comment GV adopt không sửa** | Edit rate inverse | TBD | ≥60% no-edit | Edit history | PM + AI team | GV không sửa có thể vì lười, không vì AI đúng |
-| **Trust** | Edit rate (% chữ GV phải sửa) | $ retraining cost per high-edit comment | TBD | <40% edit | Comment diff | AI team | Low edit không = học sinh nhận về thấy hữu ích |
-| Value | Hours saved per đợt kiểm tra vs full manual | $ value GV/hour × hours saved vs subscription cost | manual 15-30h | -50% (giảm xuống 7-15h) | Time survey | PM | Hours saved không = GV sẽ resubscribe |
+| Activation | % GV submit ≥1 batch grading trong tuần đầu | Cost per first-grading-batch = onboarding cost / first-batch-rate | Pilot 50 GV: ~80% submitted batch-1 (Lab 19) | 75% mass-market | grading_sessions | PM | First batch không = adoption thật, cần đợt 2 |
+| Engagement | Avg essays graded / session | Cost/essay graded ≈ COGS-allocation 75K/30 essays = ~2.5K/essay | Pilot trung bình ~40 bài/batch | 30+ | LLM API log + Supabase | PM | Power-user lấp liếm — cần distribution (top10/median/long-tail), không avg |
+| Productivity | Time-per-essay (upload→graded draft) | Haiku API cost/essay (~$0.005-0.01) vs manual GV time-value 70-100K/h × time saved | Manual baseline 15-20p/essay (Lab 16/18) | <5p draft + GV review | App telemetry | PM | Nhanh hơn ≠ chất lượng giữ được — phải gate với Quality |
+| **Quality** | **% AI comment GV adopt no-edit (composite với Trust)** | (Adopt rate) × (no rework on học sinh) | Pilot edit rate chưa công bố | ≥60% no-edit | Edit history | PM + AI team | GV không sửa có thể vì lười / dưới time pressure, không vì AI đúng |
+| **Trust** | Edit rate distribution + student dispute rate | Retraining trigger cost / high-edit-rate sample | TBD pilot | <40% median edit; <5% student dispute | Comment diff + dispute log | AI team | Low GV edit không = học sinh nhận về thấy hữu ích |
+| Value | Hours saved per đợt vs manual baseline | (GV time-value 70-100K/h × hours saved) vs ARPU 200K + COGS 75K | Manual: 15-30h/đợt (Lab 16) | -50% → 7-15h/đợt | In-product time survey | PM | Hours saved không = GV sẽ resubscribe — KR3 churn mới prove |
 
 #### Workflow 3 — Teacher Review & Edit
 
@@ -218,12 +218,13 @@ Ability (kết hợp Knowledge gap) — Desire ban đầu cao nhưng không qua 
 - "Khi tile #4 (student dispute) RED → action 48h root cause — owner cụ thể nào? PM 1 mình kham không?"
 - "Sean Ellis survey cohort theo đợt — GV làm 1 đợt rồi nghỉ thì có hiện trong cohort tháng đó không?"
 
-### Ít nhất 2 thay đổi cụ thể v1 → v2
+### Ít nhất 2 thay đổi cụ thể v1 → v2 (mandatory per rubric #6)
 
 | # | V1 vấn đề | V2 sửa | Vì sao tốt hơn |
 |---|---|---|---|
-| 1 | (điền sau red-team) | | |
-| 2 | | | |
+| 1 | **KR1 "# GV active ≥2 đợt" = vanity count tổng** — champion (top 10 pilot GV) có thể lấp liếm mass-market churn. Một dashboard 200 GV có thể che giấu 30 champion × 80% retention + 170 mass-market × 30% retention. Pattern WeFit: 10% user dùng 80% lượt → unit economics phá sản | **Split cohort**: tách "champion cohort" vs "mass-market cohort" trong KR1. Dashboard hiển thị 2 dòng riêng. KR1 chỉ PASS khi **mass-market retention ≥ 60%**, KHÔNG cộng champion. Thêm "distribution view" (top10/median/long-tail) cho mọi metric Engagement | Chống vanity metric trap (lesson WeFit). Cohort-split = nhìn thấy unit economics thật. Decision rule rõ — không gating ở số tổng dễ bị gaming |
+| 2 | **Trust metric đo từ GV (NPS, edit rate) — KHÔNG đo từ học sinh (end-user thật)** — học sinh là người cuối nhận feedback. GV "happy" có thể vì AI giảm gánh thay vì vì feedback tốt cho học sinh. Lab 22 audit cảnh báo claim "3× faster" chưa A/B 200 GV → vi phạm Khoản 2 Điều 198 nếu sai | (a) Thêm **student dispute rate** (target <5%) làm hard-gate trên dashboard mock (Tile 4) — nếu RED ≥10% phải HALT scale 48h root cause. (b) Thêm **price A/B test gate** (3 buckets 150K/200K/250K, N≥30/bucket) trước khi scale ngoài pilot. (c) Ngưng public claim "3× faster" cho đến khi N≥150 GV measured | Trust signal phải đo từ end-user cuối, không chỉ từ paying user. Price gate verify ARPU assumption Lab 18 trước khi commit forecast 200 GV. Marketing compliance — phòng vi phạm pháp luật + protect brand reputation |
+| 3 (bonus) | **Anthropic rate limit mùa thi (Lab 21 V1 risk)** — KR1 + KR2 không account cho seasonal spike. Quý 1+2 + cuối học kỳ = peak grading load đồng thời với rate limit | Thêm **capacity metric**: "Peak essays/hour qua được không degradation" + auto fallback "OpenRouter Claude Haiku fallback test < 2s switchover". Add seasonality buffer 30% capacity cho mùa thi (Q4 + cuối kỳ) | Robustness — peak season chính là moment-of-truth cho retention. AI fail lúc deadline = GV mất trust → churn spike → KR3 phá |
 
 ---
 
@@ -241,7 +242,9 @@ Ability (kết hợp Knowledge gap) — Desire ban đầu cao nhưng không qua 
    Không vanity-able. Không attribute lệch (không phải MAU đơn).
 
 3. Chỉ số/giả định đã sửa sau red-team:
-   (chờ Block 4-5)
+   - KR1 từ "tổng count GV active" → **cohort-split** (champion vs mass-market). Mass-market retention ≥ 60% là PASS gate, không cộng champion.
+   - Trust layer thêm **student dispute rate** (đo từ end-user cuối) thay vì chỉ NPS từ GV.
+   - Marketing claim "3× faster" thêm **N≥150 GV A/B gate** trước khi public claim. Hold lại claim hiện tại trên landing page (compliance — Khoản 2 Điều 198).
 
 4. Trước khi scale (sau Day 90), phải:
    1. Sean Ellis ≥40% confirmed trên cohort đợt-2 (không phải pilot bias)

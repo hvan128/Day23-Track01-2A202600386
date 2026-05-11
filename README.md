@@ -23,10 +23,10 @@
 
 | File | Loại | Deadline | Trạng thái |
 |---|---|---|---|
-| `01-case-evidence-matrix.md` | Cá nhân (1 case được giao) | Cuối Block 2 | ✅ Done (gồm cả 2 case + personal context — chờ team chia case) |
-| `02-case-comparison.md` | Nhóm (mỗi thành viên copy) | Cuối Block 2 | ✅ Done — MoMo ↔ WeFit |
-| `03-product-roi-dashboard.md` | **Cá nhân (đổi từ nhóm)** | 13:00 | ✅ v1 — GradeAI với data thực Lab 16-22 |
-| `04-reflection.md` | Cá nhân | 24h sau lớp | 📝 Skeleton |
+| `01-case-evidence-matrix.md` | **Cá nhân** (1 case được giao = MoMo) | Cuối Block 2 | ✅ Done — single case format (MoMo) per template v2 |
+| `02-case-comparison.md` | **Nhóm** (mỗi thành viên copy về repo cá nhân) | Cuối Block 2 | ✅ Done — MoMo ↔ WeFit |
+| `03-product-roi-dashboard.md` | **Cá nhân** (team đổi từ nhóm — mỗi người 1 product) | 13:00 | ✅ v2 — GradeAI + red-team done + ≥2 v1→v2 changes |
+| `04-reflection.md` | **Cá nhân** | 24h sau lớp | 📝 Skeleton (final trong 24h) |
 
 ---
 
@@ -69,11 +69,10 @@ Dev tại vendor payment processing (OpenWay Way4) phục vụ NH thương mại
 
 ## Submit checklist
 
-- [ ] Repo public trước Block 5 end (13:00)
-- [x] `01-case-evidence-matrix.md` ready (chờ team chia case nếu cần)
-- [x] `02-case-comparison.md` synced với team (MoMo ↔ WeFit)
-- [x] `03-product-roi-dashboard.md` v1 — GradeAI, individual scope
-- [ ] `03` v2 sau red-team Block 4-5
-- [ ] Link repo share Discord `#day23-submissions`
-- [ ] `04-reflection.md` trong 24h
+- [x] Repo public (https://github.com/hvan128/Day23-Track01-2A202600386)
+- [x] `01-case-evidence-matrix.md` — single case (MoMo) per template v2
+- [x] `02-case-comparison.md` — synced với team (MoMo ↔ WeFit)
+- [x] `03-product-roi-dashboard.md` v2 — GradeAI + red-team cột 7-8 filled + 3 v1→v2 changes
+- [ ] Link repo share Discord `#day23-submissions` (sau Block 5)
+- [ ] `04-reflection.md` final trong 24h
 - [ ] Repo public ≥ 2 tuần
